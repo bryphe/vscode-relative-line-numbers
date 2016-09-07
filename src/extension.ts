@@ -12,9 +12,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     var decorations: vscode.TextEditorDecorationType[] = createDecorations();
 
-    // Is there a better way to handle this? Ideally, there'd be some sort of
-    // cursor or selection move event we can hook into.
-    intervalId = setInterval(() => {
+    vscode.window.onDidChangeTextEditorSelection((e: vscode.TextEditorSelectionChangeEvent) => {
         var editor = vscode.window.activeTextEditor;
 
         if (!editor)
@@ -41,8 +39,7 @@ export function activate(context: vscode.ExtensionContext) {
 
             editor.setDecorations(decorations[delta - 1], rangesForDecoration);
         }
-    }, INTERVAL);
-
+    });
 }
 
 function createDecorations(): vscode.TextEditorDecorationType[] {
