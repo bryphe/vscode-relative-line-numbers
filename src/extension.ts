@@ -3,13 +3,8 @@ import * as vscode from 'vscode';
 import * as path from "path";
 
 var MAX_ICONS = 99;
-var INTERVAL = 25; /* ms */
-var intervalId = null;
 
 export function activate(context: vscode.ExtensionContext) {
-    if(intervalId !== null)
-        return;
-
     var decorations: vscode.TextEditorDecorationType[] = createDecorations();
 
     vscode.window.onDidChangeTextEditorSelection((e: vscode.TextEditorSelectionChangeEvent) => {
@@ -58,6 +53,5 @@ function createDecorations(): vscode.TextEditorDecorationType[] {
 
 // this method is called when your extension is deactivated
 export function deactivate() {
-    clearTimeout(intervalId);
-    intervalId = null;
+
 }
