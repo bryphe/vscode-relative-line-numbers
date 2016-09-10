@@ -11,10 +11,17 @@ This is useful if you are using one of the VIM plugins - ie, [VSCodeVim](#https:
 - Open the command palette in Visual Studio Code (`Ctrl-Shift-P` or `Cmd-Shift-P`)
 - Select `Install Extension` and search for 'Relative line numbers'
 
+## Commands
+
+__Relative Line Numbers: Disable__ (`extension.relativeLineNumbersDisable`) - turn off relative line numbering. This is useful when debugging or in other situations where other gutter icons need to be visible.
+
+__Relative Line Numbers: Enable__ (`extension.relativeLineNumbersEnable`) - turn relative line numbering back on.
+
+Use `Control+Shift+P` to open the command palette and run the commands.
+
 ## Source
 
 [Github](https://github.com/extr0py/vscode-relative-line-numbers)
-
 
 ## Issues
 
