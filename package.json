@@ -2,7 +2,7 @@
   "name": "vscode-relative-line-numbers",
   "displayName": "Relative Line Numbers",
   "description": "Implementation of relative line numbers, using gutter imgaes",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "extr0py",
   "engines": {
     "vscode": "^1.0.0"
