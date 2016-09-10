@@ -6,8 +6,26 @@ var MAX_ICONS = 99;
 
 export function activate(context: vscode.ExtensionContext) {
     var decorations: vscode.TextEditorDecorationType[] = createDecorations();
+    var isExtensionEnabled = true;
+
+    vscode.commands.registerCommand("extension.relativeLineNumbersEnable", () => {
+        isExtensionEnabled = true;
+        setRelativeLineDecorations()
+    });
+
+    vscode.commands.registerCommand("extension.relativeLineNumbersDisable", () => {
+        isExtensionEnabled = false;
+        clearRelativeLineDecorations();
+    });
 
     vscode.window.onDidChangeTextEditorSelection((e: vscode.TextEditorSelectionChangeEvent) => {
+        if (!isExtensionEnabled)
+            return;
+
+        setRelativeLineDecorations();
+    });
+
+    function setRelativeLineDecorations(): void {
         var editor = vscode.window.activeTextEditor;
 
         if (!editor)
@@ -16,8 +34,8 @@ export function activate(context: vscode.ExtensionContext) {
         var selection = editor.selection;
         var text = editor.document.getText(selection);
 
-        var line = vscode.window.activeTextEditor.selection.active.line;
-        var totalLines = vscode.window.activeTextEditor.document.lineCount;
+        var line = editor.selection.active.line;
+        var totalLines = editor.document.lineCount;
 
         for (var delta = 1; delta < MAX_ICONS; delta++) {
             var rangesForDecoration: vscode.Range[] = [];
@@ -34,7 +52,18 @@ export function activate(context: vscode.ExtensionContext) {
 
             editor.setDecorations(decorations[delta - 1], rangesForDecoration);
         }
-    });
+    }
+
+    function clearRelativeLineDecorations(): void {
+        var editor = vscode.window.activeTextEditor;
+
+        if (!editor)
+            return;
+
+        decorations.forEach((d) => {
+            editor.setDecorations(d, []);
+        });
+    }
 }
 
 function createDecorations(): vscode.TextEditorDecorationType[] {
@@ -47,7 +76,6 @@ function createDecorations(): vscode.TextEditorDecorationType[] {
             })
         )
     }
-
     return ret;
 }
 
