@@ -1,3 +1,11 @@
+# NOTE: THIS IS NOW DEPRECATED WITH VSCODE 1.6
+
+## Use the `editor.lineNumbers` setting with the value of `relative` for a better experience
+
+See [Visual Studio Code 1.6 Release Notes](http://code.visualstudio.com/updates#_improvements-to-linenumber-and-whitespace-settings) for more details.
+
+---
+
 # vscode-relative-line-numbers
 
 ![demo](http://i.imgur.com/AZxJCty.gif)
